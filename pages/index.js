@@ -3,9 +3,10 @@ import EventList from "../components/events/event-list";
 
 function HomePage() {
   const featuredEvents = getFeaturedEvents();
-  console.log(featuredEvents);
+
   return (
     <div>
+      <header></header>
       <EventList items={featuredEvents} />
     </div>
   );
