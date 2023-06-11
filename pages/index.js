@@ -1,4 +1,8 @@
+import path from "path";
+import fs from "fs/promises"; // Node.js 로 부터 파일 시스템 모듈을 임포트
+
 function HomePage(props) {
+  //getStaticProps를 통해 가져온 json데이터를 props를 통해 전달
   const { products } = props;
   return (
     <ul>
@@ -10,9 +14,13 @@ function HomePage(props) {
 }
 
 export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+  const jsonData = await fs.readFile(filePath);
+  const data = JSON.parse(jsonData);
+
   return {
     props: {
-      products: [{ id: "p1", title: "Product 1" }],
+      products: data.products,
     },
   };
 }
